@@ -113,7 +113,7 @@ function canvasApp() {
 		turnSpeed = 2 * Math.PI / 1200; //the sphere will rotate at this speed (one complete rotation every 1600 frames).
 		turnAngle = 0; //initial angle
 
-		timer = setInterval(onTimer, 10 / 24);
+		timer = setInterval(onTimer, 1000 / 30);
 	}
 
 	function onTimer() {
