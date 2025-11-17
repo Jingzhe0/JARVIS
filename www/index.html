@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JARVIS</title>
 
+        <link rel="shortcut icon" href="assests/images/logo.ico" type="image/x-icon">
 
         <!-- ---BOOTSTRAP-- -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <!-- ---BOOTSTRAP ICONS-- -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 
         <!-- PARTICLE JS -->
@@ -23,11 +27,12 @@
 
 </head>
 <body>
-    
-        <section id="oval" class="mb-4">
+    <div class="container">
+        <section id="oval" class="mb-4" >
+                <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
-                        <div class="d-flex" justify-content-center align-items-center style="height: 80vh;">
+                        <div class="d-flex" style="height: 80vh;">
 
                                 <canvas id="canvasOne" class="canvasOne" width="700" height="420" style="position: absolute;"></canvas>
 
@@ -40,10 +45,50 @@
                                 </div>
                         </div>
                         <h5 class="text-light  text  text-center">Ask me anything</h5>
+
+                        <div class="col-md-12 mt-4 pt-4">
+                                <div class="text-center">
+                                        <div id="textInput" class="d-flex">
+                                                <input type="text" class="input-field" name="chatbox" id="chatbox" placeholder="type here...">
+                                                <button id="micButton" class="glow-on-hover"><i class="bi bi-mic"></i></button>
+                                                <button id="chatButton" class="glow-on-hover"><i class="bi bi-chat-dots"></i></button>
+                                                <button id="settingsButton" class="glow-on-hover"><i class="bi bi-gear"></i></button>
+                                        </div>
+                                </div>
+                        </div>
+
+
                 </div>
                 <div class="col-md-1"></div>
+                </div>
         </section>
 
+        <section id="siriWave" class="mb-4" hidden>
+
+                <div class="container">
+
+                        <div class="row">
+                                <div class="col-md-12">
+                                        <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+                                                <div class="">
+
+                                                        <p class="text-start text-light mb-4 siri-message" >Lorem ipsum dolor sit amet consectetur adipisicing elit. praesentium distinctio. Tenetur, minus.</p>
+                                                        <div id="siri-container">
+        
+                                                        </div>
+                                                </div>
+
+
+                                        </div>
+                                </div>
+
+                        </div>
+                </div>
+
+        </section>
+
+    </div>
+       
 
 
          <!--Jquery  -->
@@ -54,7 +99,12 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
                 
         <!-- ---PARTICLE js--- -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
         <script src="../script.js"> </script>
+
+        <!-- SIRI WAVE -->
+        <script src="https://unpkg.com/siriwave/dist/siriwave.umd.min.js"></script>
 
         <!-- TEXLLATE JS -->
          <script src="assests/vendore/texllate-20251113T075622Z-1-001/texllate/jquery.fittext.js"></script>
@@ -63,6 +113,8 @@
 
 
          <script src="main.js"></script>
+
+         <script src="/eel.js"></script>
 
 
 </body>
