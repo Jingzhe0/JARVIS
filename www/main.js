@@ -39,4 +39,14 @@ $(document).ready(function () {
         },
     });
 
+
+    // mic button siri wave
+
+    $("#micButton").click(function () { 
+        eel.playAssistantSound()
+        $("#oval").attr("hidden",true);
+        $("#siriWave").attr("hidden",false);
+        
+    });
+
 });
