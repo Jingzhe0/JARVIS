@@ -11,7 +11,7 @@ $(document).ready(function(){
     // display hood
     eel.expose(ShowHood)
     function ShowHood(){
-        $("oval").attr("hidden",false);
+        $("#oval").attr("hidden",false);
         $("#siriWave").attr("hidden",true);
     }
 });

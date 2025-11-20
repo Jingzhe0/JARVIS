@@ -1,6 +1,7 @@
 import pyttsx3
 import speech_recognition as sr
 import eel
+import time
 
 
 def speak(text):
@@ -8,12 +9,12 @@ def speak(text):
     voices=engine.getProperty("voices")
     engine.setProperty("voices",voices[0].id)
     engine.setProperty('rate',180)
-
+    eel.DisplayMessage(text)
     engine.say(text)
     engine.runAndWait()
 
 
-@eel.expose
+# @eel.expose
 def takecommand():
 
     r= sr.Recognizer()
@@ -32,17 +33,29 @@ def takecommand():
         query= r.recognize_google(audio, language='en-in')
         print(f"user said:{query}")
         eel.DisplayMessage(query)
+        # time.sleep(1)
         speak(query)
-        eel.ShowHood()
+        
 
     except Exception as e:
         return ""
     
     return query.lower()
 
+@eel.expose
+def allCommand():
+    query = takecommand()
+    print (query)
 
-# text= takecommand()
+    if "open" in query:
+        from engine.features import openCommand
+        openCommand(query)
 
-# speak("Hello i am Gesturix i am an AI assistant which will make your life better")
+    elif "on youtube":
+        from engine.features import PlayYouTube
+        PlayYouTube(query)
+    else :
+        print('not run')
 
-# speak(text)
+
+    eel.ShowHood()
