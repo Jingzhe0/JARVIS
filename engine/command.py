@@ -51,9 +51,10 @@ def allCommand():
         from engine.features import openCommand
         openCommand(query)
 
-    elif "on youtube":
-        from engine.features import PlayYouTube
-        PlayYouTube(query)
+    elif "on YouTube":
+        from engine.features import PlayYoutube
+        PlayYoutube(query)
+        
     else :
         print('not run')
 

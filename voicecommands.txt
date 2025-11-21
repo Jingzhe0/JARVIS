@@ -1,0 +1,2 @@
+to play something on yt~ jarvis play __ on youtube   (key is the patter jarvis play followed by search and end by 'on youtube' )
+to open app like notepad~ jarvis open notepad   (key is the word open and the next word after open)

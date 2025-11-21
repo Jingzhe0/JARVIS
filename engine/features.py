@@ -1,3 +1,4 @@
+import re
 from playsound import playsound
 import eel
 import os
@@ -27,10 +28,12 @@ def openCommand(query):
         speak("not found")
 
 
-def PlayYouTube(query):
+def PlayYoutube(query):
     search_term= extract_yt_term(query)
     speak("Playing "+search_term+ "on YouTube")
     kit.playonyt(search_term)
+
+
 
 
 def extract_yt_term(command):
@@ -40,3 +43,6 @@ def extract_yt_term(command):
     match= re.search(pattern,command,re.IGNORECASE)
 
     return match.group(1) if match else None 
+
+
+
