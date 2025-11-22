@@ -50,4 +50,19 @@ $(document).ready(function () {
         
     });
 
+
+    function doc_keyUp(e) {
+        // to test which key is down arror and ctrl at same time
+
+        if(e.key === 'j' && e.metaKey) {
+            eel.playAssistantSound()
+            $("#oval").attr("hidden",true);
+            $("#siriWave").attr("hidden",false);
+            eel.allCommand()()
+        }
+    }
+
+    document.addEventListener('keyup',doc_keyUp,false);
+
+
 });
