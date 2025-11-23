@@ -12,8 +12,8 @@ cursor =conn.cursor()
 
 # X
 
-query= "CREATE TABLE IF NOT EXISTS sys_command(id integer primary key, name VARCHAR(100), path VARCHAR(1000))" 
-cursor.execute(query)
+# query= "CREATE TABLE IF NOT EXISTS sys_command(id integer primary key, name VARCHAR(100), path VARCHAR(1000))" 
+# cursor.execute(query)
 
 #Create a table web_command
 
@@ -26,10 +26,25 @@ cursor.execute(query)
 # conn.commit()
 
 
+# add url in url db
+# query = "CREATE TABLE IF NOT EXISTS web_command(id integer primary key, name VARCHAR(100), url VARCHAR(1000))"
+# cursor.execute(query)
 
-query = "CREATE TABLE IF NOT EXISTS web_command(id integer primary key, name VARCHAR(100), url VARCHAR(1000))"
-cursor.execute(query)
+# query= "INSERT INTO web_command VALUES (null, 'youtube', 'https://www.youtube.com/')"
+# cursor.execute(query)
+# conn.commit()
 
-query= "INSERT INTO web_command VALUES (null, 'youtube', 'https://www.youtube.com/')"
-cursor.execute(query)
-conn.commit()
+# add contanct in number database
+# cursor.execute('''CREATE TABLE IF NOT EXISTS contacts (id integer primary key, name VARCHAR(200), mobile_no VARCHAR(255),email VARCHAR(255) NULL) ''')
+
+# query="INSERT INTO contacts VALUES (null,'sarthak','8881931169', NULL)"
+# cursor.execute(query)
+# conn.commit()
+
+query= 'sarthak'
+query=query.strip().lower()
+
+cursor.execute("SELECT mobile_no FROM contacts WHERE LOWER(name) LIKE ? OR LOWER(name) LIKE ?", ('%' + query +'%', query+ '%'))
+results=cursor.fetchall()
+print(results[0][0])
+
