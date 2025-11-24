@@ -65,4 +65,54 @@ $(document).ready(function () {
     document.addEventListener('keyup',doc_keyUp,false);
 
 
+    function playAssistantSound (message) {  
+        if (message !=""){
+            $("#oval").attr("hidden",true);
+            $("#siriWave").attr("hidden",false);
+            eel.allCommand(message)
+            $("#chatbox").val("")
+            $("#micButton").attr("hidden",false);
+            $("#SendBtn").attr("hidden",true);
+        }
+    }
+
+
+    function ShowHideButton (message) {  
+        if (message.length ==0){
+            $("#micButton").attr("hidden",false);
+            $("#SendBtn").attr("hidden",true);
+        }
+        else{
+            $("#micButton").attr("hidden",true);
+            $("#SendBtn").attr("hidden",false);
+        }
+            
+    }
+
+
+    $("#chatbox").keyup(function() {
+
+        let message = $("#chatbox").val();
+        ShowHideButton(message)
+    });
+
+    $("#SendBtn").click(function() {
+
+        let message = $("#chatbox").val();
+        playAssistantSound(message)
+    });
+
+
+
+     $("#chatbox").keypress(function(e) {
+
+        key=e.which;
+        if(e.key=="Enter"){
+            let message = $("#chatbox").val();
+            playAssistantSound(message)
+        }
+     });
+
+
+
 });
