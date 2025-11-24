@@ -11,6 +11,7 @@ import os
 import pvporcupine
 import pyaudio
 import pyautogui
+import pyautogui as autogui
 from engine.command import speak
 from engine.config import ASSISTANT_NAME
 import pywhatkit as kit
@@ -105,7 +106,7 @@ def hotword():
                 print("hotword detected")
 
                 # process shortcut key
-                import pyautogui as autogui
+                
                 autogui.keyDown("win")
                 autogui.press("j")
                 time.sleep(2)
@@ -173,8 +174,11 @@ def whatsApp(mobile_no, message, flag, name):
     time.sleep(5)
     subprocess.run(full_command, shell=True)
     
+    # shortcut key for whatsapp search 
     pyautogui.hotkey('ctrl', 'f')
 
+
+    # tab button makes change of target in whatsapp
     for i in range(1, target_tab):
         pyautogui.hotkey('tab')
 

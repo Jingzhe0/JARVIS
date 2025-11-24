@@ -41,10 +41,10 @@ cursor =conn.cursor()
 # cursor.execute(query)
 # conn.commit()
 
-query= 'sarthak'
-query=query.strip().lower()
+# query= ''
+# query=query.strip().lower()
 
-cursor.execute("SELECT mobile_no FROM contacts WHERE LOWER(name) LIKE ? OR LOWER(name) LIKE ?", ('%' + query +'%', query+ '%'))
-results=cursor.fetchall()
-print(results[0][0])
+# cursor.execute("SELECT mobile_no FROM contacts WHERE LOWER(name) LIKE ? OR LOWER(name) LIKE ?", ('%' + query +'%', query+ '%'))
+# results=cursor.fetchall()
+# print(results[0][0])
 
