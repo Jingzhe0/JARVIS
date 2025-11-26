@@ -11,6 +11,7 @@ def speak(text):
     engine.setProperty('rate',180)
     eel.DisplayMessage(text)
     engine.say(text)
+    eel.receiverText(text)
     engine.runAndWait()
 
 
@@ -49,10 +50,11 @@ def allCommand(message=1):
     if message==1 :
             query = takecommand()
             print (query)
+            eel.senderText(query)
 
     else:
         query= message
-        
+        eel.senderText(query)
 
 
     try:
@@ -62,7 +64,7 @@ def allCommand(message=1):
             from engine.features import openCommand
             openCommand(query)
 
-        elif "on YouTube" in query:
+        elif "on youtube" in query:
             from engine.features import PlayYoutube
             PlayYoutube(query)
 
