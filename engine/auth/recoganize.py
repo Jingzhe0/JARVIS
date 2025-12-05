@@ -87,4 +87,3 @@ def AuthenticateFace():
 
 
 
-AuthenticateFace()
