@@ -93,6 +93,28 @@ $(document).ready(function(){
     }
 
 
+    let gestureOn = false;
+
+    
+    function toggleGesture() {
+    if (!gestureOn) {
+        eel.ui_start_gesture()(function (res) {
+            if (res) {
+                gestureOn = true;
+                document.getElementById("gestureBtn").innerText = "🖐️ Gesture ON";
+            }
+        });
+    } else {
+        eel.ui_stop_gesture()(function (res) {
+            if (res) {
+                gestureOn = false;
+                document.getElementById("gestureBtn").innerText = "🖐️ Gesture OFF";
+            }
+        });
+    }
+}
+
+
 
 
 });

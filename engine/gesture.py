@@ -1,15 +1,12 @@
+# engine/gesture.py
 import cv2
 import mediapipe as mp
 import pyautogui
 import time
+from multiprocessing import Event
 
-def start_gesture_control(mode=1):
-    """
-    mode = 1 → Mouse control
-    mode = 2 → Keyboard control
-    """
-
-    screen_w, screen_h =    pyautogui.size()
+def gesture_controller(stop_event, mode=1):
+    screen_w, screen_h = pyautogui.size()
 
     mp_hands = mp.solutions.hands
     mp_draw = mp.solutions.drawing_utils
@@ -37,7 +34,7 @@ def start_gesture_control(mode=1):
 
         prev_action_time = 0
 
-        while True:
+        while not stop_event.is_set():
             ret, frame = cap.read()
             if not ret:
                 break
@@ -49,41 +46,26 @@ def start_gesture_control(mode=1):
             if results.multi_hand_landmarks:
                 hand = results.multi_hand_landmarks[0]
 
-                # ===== MOUSE CONTROL =====
+                # Mouse mode
                 if mode == 1:
-                    index_finger = hand.landmark[8]
-                    x = int(index_finger.x * screen_w)
-                    y = int(index_finger.y * screen_h)
+                    index = hand.landmark[8]
+                    x = int(index.x * screen_w)
+                    y = int(index.y * screen_h)
                     pyautogui.moveTo(x, y)
 
-                    thumb = hand.landmark[4]
-                    if abs(index_finger.x - thumb.x) < 0.03:
-                        pyautogui.click()
-                        time.sleep(0.3)
-
-                # ===== KEYBOARD CONTROL =====
+                # Keyboard mode
                 else:
                     fingers = count_fingers(hand)
                     now = time.time()
-
                     if now - prev_action_time > 0.3:
-                        if fingers == 1:
-                            pyautogui.press("up")
-                        elif fingers == 2:
-                            pyautogui.press("down")
-                        elif fingers == 3:
-                            pyautogui.press("right")
-                        elif fingers == 4:
-                            pyautogui.press("left")
-                        elif fingers == 5:
-                            pyautogui.press("space")
-
+                        keys = {1: "up", 2: "down", 3: "right", 4: "left", 5: "space"}
+                        if fingers in keys:
+                            pyautogui.press(keys[fingers])
                         prev_action_time = now
 
                 mp_draw.draw_landmarks(frame, hand, mp_hands.HAND_CONNECTIONS)
 
             cv2.imshow("Jarvis Gesture Control", frame)
-
             if cv2.waitKey(1) & 0xFF == 27:
                 break
 

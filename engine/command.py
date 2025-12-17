@@ -2,6 +2,7 @@ import pyttsx3
 import speech_recognition as sr
 import eel
 import time
+from engine.gesture_manager import start_gesture, stop_gesture
 
 
 def speak(text):
@@ -88,15 +89,20 @@ def allCommand(message=1):
                 whatsApp(contact_no, query, message, name)
 
 
-        elif "gesture control" in query:
-            from engine.gesture import start_gesture_control
-            speak("Starting gesture control")
-            start_gesture_control(mode=1)
+        elif "turn on gesture" in query or "start gesture" in query:
+            from engine.gesture_manager import start_gesture
+            speak("Gesture control activated")
+            start_gesture(mode=1)
+
+        elif "turn off gesture" in query or "stop gesture" in query:
+            from engine.gesture_manager import stop_gesture
+            speak("Gesture control stopped")
+            stop_gesture()
 
         elif "gesture keyboard" in query:
-            from engine.gesture import start_gesture_control
-            speak("Starting gesture keyboard mode")
-            start_gesture_control(mode=2)
+            from engine.gesture_manager import start_gesture
+            speak("Gesture keyboard mode activated")
+            start_gesture(mode=2)
 
         
             
@@ -108,3 +114,12 @@ def allCommand(message=1):
 
 
     eel.ShowHood()
+
+
+    @eel.expose
+    def ui_start_gesture():
+        return start_gesture(mode=1)
+
+    @eel.expose
+    def ui_stop_gesture():
+        return stop_gesture()
