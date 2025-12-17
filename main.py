@@ -11,9 +11,18 @@ def start():
         eel.init("www")
 
         playAssistantSound()
-
-        flag= recoganize.AuthenticateFace()
-
+        @eel.expose
+        def init():
+                eel.hideLoader()
+                speak("Ready for Face Authentication")
+                flag= recoganize.AuthenticateFace()
+                if flag==1:
+                        eel.hideFaceAuth()
+                        speak("Face authentication succesful")
+                        eel.hideFaceAuthSuccess()
+                        eel.hideStart()
+                else:
+                        speak("Face authentication succesful")
 
         os.system('start msedge.exe --app="http://localhost:8000/index.html"')
 

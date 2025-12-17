@@ -86,6 +86,18 @@ def allCommand(message=1):
                     message = 'video call'
                     
                 whatsApp(contact_no, query, message, name)
+
+
+        elif "gesture control" in query:
+            from engine.gesture import start_gesture_control
+            speak("Starting gesture control")
+            start_gesture_control(mode=1)
+
+        elif "gesture keyboard" in query:
+            from engine.gesture import start_gesture_control
+            speak("Starting gesture keyboard mode")
+            start_gesture_control(mode=2)
+
         
             
         else :
