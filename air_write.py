@@ -24,6 +24,7 @@ def fingers_up(hand):
     return fingers
 
 cap = cv2.VideoCapture(0)
+exit_air_write = False
 
 while True:
     success, frame = cap.read()
@@ -55,9 +56,15 @@ while True:
                 prev_x, prev_y = x, y
 
             # 2 fingers → erase
-            elif fingers[1] == 1 and fingers[2] == 1:
+            elif fingers[1] == 1 and fingers[2] == 1 and not (fingers[3] == 1 and fingers[4] == 1):
                 cv2.circle(canvas, (x, y), eraser_thickness, (0,0,0), -1)
                 prev_x, prev_y = 0, 0
+
+            # 5 fingers → exit air writing mode
+            elif sum(fingers) == 5:
+                print("5 fingers detected: exiting Air Writing mode")
+                exit_air_write = True
+                break
 
             # 4 fingers → save full screen screenshot
             elif fingers[1] == 1 and fingers[2] == 1 and fingers[3] == 1 and fingers[4] == 1:
@@ -72,6 +79,9 @@ while True:
                 prev_x, prev_y = 0, 0
 
             mp_draw.draw_landmarks(frame, hand, mp_hands.HAND_CONNECTIONS)
+
+        if exit_air_write:
+            break
 
     # Merge canvas with camera frame
     gray = cv2.cvtColor(canvas, cv2.COLOR_BGR2GRAY)
